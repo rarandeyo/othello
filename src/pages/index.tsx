@@ -38,14 +38,27 @@ const Home = () => {
         }
       }
     }
-
     if (board[y][x - 1] !== undefined && board[y][x - 1] !== 0 && board[y][x - 1] !== turnColor) {
-      newborad[y][x] = turnColor;
-      setTurncolor(3 - turnColor);
+      for (let i = x - 1; i >= 0; i = i - 1) {
+        if (board[y][i] === turnColor) {
+          newborad[y][x] = turnColor;
+          for (let j = x - 1; j > i; j = j - 1) {
+            newborad[y][j] = turnColor;
+          }
+          setTurncolor(3 - turnColor);
+        }
+      }
     }
     if (board[y][x + 1] !== undefined && board[y][x + 1] !== 0 && board[y][x + 1] !== turnColor) {
-      newborad[y][x] = turnColor;
-      setTurncolor(3 - turnColor);
+      for (let i = x + 1; i < board.length; i++) {
+        if (board[y][i] === turnColor) {
+          newborad[y][x] = turnColor;
+          for (let j = x + 1; j < i; j++) {
+            newborad[y][j] = turnColor;
+          }
+          setTurncolor(3 - turnColor);
+        }
+      }
     }
 
     setboard(newborad);
