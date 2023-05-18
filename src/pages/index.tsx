@@ -12,7 +12,19 @@ const Home = () => {
     [0,0,0,0,0,0,0,0,],
     [0,0,0,0,0,0,0,0,],
     [0,0,0,0,0,0,0,0,],
-  ])
+  ]);
+  const count_stone = (color: number) => {
+    let counter = 0;
+    for (const raw of board) {
+      for (const cell of raw) {
+        if (color === cell) {
+          counter++;
+        }
+      }
+    }
+    return counter;
+  };
+
   const clickLine = (x: number, y: number) => {
     console.log(x, y);
     const newBoard: number[][] = JSON.parse(JSON.stringify(board));
@@ -77,6 +89,10 @@ const Home = () => {
             </div>
           ))
         )}
+      </div>
+      <div>{turnColor === 1 ? '黒のターン' : '白のターン'}</div>
+      <div>
+        黒{count_stone(1)} 白{count_stone(2)}
       </div>
     </div>
   );
