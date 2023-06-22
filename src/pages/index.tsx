@@ -1,5 +1,7 @@
 import { useState } from 'react';
+import { Line } from '../components/line';
 import styles from './index.module.css';
+
 const Home = () => {
   const [turnColor, setTurncolor] = useState(1);
   // prettier-ignore
@@ -79,14 +81,7 @@ const Home = () => {
       <div className={styles.square}>
         {board.map((raw, y) =>
           raw.map((color, x) => (
-            <div className={styles.line} key={`${x}-${y}`} onClick={() => clickLine(x, y)}>
-              {color !== 0 && (
-                <div
-                  className={styles.stone}
-                  style={{ background: color === 1 ? '#000' : '#fff' }}
-                />
-              )}
-            </div>
+            <Line key={`${x}-${y}`} x={x} y={y} color={color} onClick={() => clickLine(x, y)} />
           ))
         )}
       </div>
