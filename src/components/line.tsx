@@ -1,4 +1,4 @@
-import styles from '../pages/index.module.css';
+import styles from './line.module.css';
 export const Line = (props: { x: number; y: number; color: number; onClick: () => void }) => {
   return (
     <div className={styles.line} onClick={props.onClick}>
