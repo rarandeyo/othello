@@ -3,7 +3,7 @@ import { useGame } from '../hooks/useGame';
 import styles from './index.module.css';
 
 const Home = () => {
-  const { board, clickLine, turnColor, count_stone } = useGame();
+  const { board, clickLine, turnColor, countStone } = useGame();
   return (
     <div className={styles.container}>
       <div className={styles.square}>
@@ -15,7 +15,7 @@ const Home = () => {
       </div>
       <div>{turnColor === 1 ? '黒のターン' : '白のターン'}</div>
       <div>
-        黒{count_stone(1)} 白{count_stone(2)}
+        黒{countStone(1)} 白{countStone(2)}
       </div>
     </div>
   );
