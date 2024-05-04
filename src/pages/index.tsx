@@ -59,7 +59,6 @@ const Home = () => {
     const newBoard = board.map((row, y) =>
       row.map((cell, x) => (canPlaceStone(x, y, color) ? 3 : cell))
     );
-    console.table(newBoard);
     setBoard(newBoard);
   };
   useEffect(() => {
@@ -92,6 +91,7 @@ const Home = () => {
         });
       }
     });
+
     newBoard.forEach((row, y) => {
       row.forEach((cell, x) => {
         if (cell === 3) {
@@ -99,9 +99,35 @@ const Home = () => {
         }
       });
     });
-
     setBoard(newBoard);
-    setTurnColor(3 - turnColor);
+    const canCurrentPlayerPlaceStone = board
+      .flat()
+      .map((cell, index) => {
+        const x = index % board.length;
+        const y = Math.floor(index / board.length);
+        return canPlaceStone(x, y, turnColor);
+      })
+      .includes(true);
+
+    if (canCurrentPlayerPlaceStone) {
+      setTurnColor(3 - turnColor);
+    } else {
+      const nextTurnColor = 3 - turnColor;
+      setTurnColor(nextTurnColor);
+
+      const canNextPlayerPlaceStone = board
+        .flat()
+        .map((cell, index) => {
+          const x = index % board.length;
+          const y = Math.floor(index / board.length);
+          return canPlaceStone(x, y, nextTurnColor);
+        })
+        .includes(true);
+
+      if (!canNextPlayerPlaceStone) {
+        alert('ゲーム終了');
+      }
+    }
   };
 
   return (
